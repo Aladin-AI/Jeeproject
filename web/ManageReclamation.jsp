@@ -71,7 +71,64 @@
 
 	</head>
 	<body>
-	
+	<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputsubject">Subject</label>
+      <input type="text" class="form-control" id="inputsubject" placeholder="Subject">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputdescription">Description</label>
+      <input type="text" class="form-control" id="inputdescription" placeholder="Description">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">Address</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="Enter ur adress">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">Country</label>
+      <input type="text" class="form-control" id="inputCity">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">State</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+      <div class="form-group col-md-4">
+    <label class="custom-file">
+  <input type="file" id="file" class="custom-file-input">
+  <span class="custom-file-control"></span>
+</label>
+      </div>
+  </div>
+</form>
+          
+          
+      </div>
+      <div class="modal-footer">
+          
+         <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="reset" class="btn btn-primary" >Reset</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 	
 	<div id="fh5co-page">
 	<header id="fh5co-header" role="banner">
@@ -106,11 +163,17 @@
 	<div id="best-deal">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box" data-animate-effect="fadeIn">
-					<h2>We are Offering the Best Real Estate Deals</h2>
-					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-				</div>
-				
+				  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">                                                                    
+                                      <span class="glyphicon glyphicon-plus"></span>addreclamation
+                                   </button>
+
+                                           
+                            
+			</div>
+
+
+                </div>
+				<div class="container">
 				<div class="col-md-4 item-block animate-box" data-animate-effect="fadeIn">
 
 
