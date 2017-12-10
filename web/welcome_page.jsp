@@ -1,3 +1,16 @@
+<%@page import="java.awt.image.BufferedImage"%>
+<%@page import="javax.imageio.ImageIO"%>
+<%@page import="java.io.ByteArrayInputStream"%>
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.sql.Blob"%>
+<%@page import="java.io.InputStream"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.io.File"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.io.FileInputStream"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="beans.User"%>
 <!--<!DOCTYPE html>
@@ -100,13 +113,13 @@
 						<ul>
 							<!--<li><a href="buy.html">Buy</a></li>-->
 							<!--<li><a href="rent.html">Rent</a></li>-->
-							<li><a href="ManageReclamation.jsp">ManageReclamation</a></li>
 							<li class="call"><a href="tel://123456789"><i class="icon-phone"></i> +1 123 456 789</a></li>
                                                        
                                                         <!--<li class="cta"><a href="login_form.jsp">Login</a></li>
                                                         <li class="cta"><a href="register_form.jsp">Signup</a></li>-->
                                                         <!--<li class="cta"><a href="contact.html">Contact us</a></li>-->
-                                                         <li >
+                                                        <li><a href="ManageReclamation.jsp">ManageReclamation</a></li> 
+                                                        <li >
                                                        <i class="glyphicon glyphicon-user"></i>
                   
                                                                <%  
@@ -137,8 +150,55 @@
 		</div>
 	</header>
 	
+  <%
+          try{
+          Connection myConnection = null;
+                       PreparedStatement pstmt = null;
+            String j2ee = "jdbc:mysql://localhost:3306/j2ee?user=root";
+              ResultSet rs = null;
+              FileInputStream fis = null;
+  
+                Class.forName("com.mysql.jdbc.Driver");
+                 myConnection = DriverManager.getConnection(j2ee);
+                
+                Statement statement = myConnection.createStatement();
+                ResultSet resultat = statement.executeQuery( "SELECT *  FROM reclamation;" );
+                
+            
+      while ( resultat.next() ) {
+    String subject = resultat.getString("subject");
+    String description = resultat.getString("description");
+    String country = resultat.getString("country");
+    String state = resultat.getString( "state" );
+    String adress = resultat.getString( "adress" );
+          Blob image = resultat.getBlob("image");
+          
+          
+int blobLength = (int) image.length();
+byte[] blobAsBytes = image.getBytes(1, blobLength);
 
-	<aside id="fh5co-hero" clsas="js-fullheight">
+
+BufferedImage imagef = ImageIO.read( new ByteArrayInputStream( blobAsBytes ) );
+
+
+ImageIO.write(imagef, "JPEG", new File("C:/Users/hmidi/Desktop/imageala.JPG"));
+ImageIO.write(imagef, "JPEG", new File("C:/Users/hmidi/Desktop/imageala.BMP"));
+
+      out.print(subject);
+       out.print(description);
+        out.print(country);
+      out.print(state);
+           out.print(adress);
+           out.print("<img src=\"C:/Users/hmidi/Desktop/imageala.JPG\" >");
+
+    /* Traiter ici les valeurs récupérées. */
+                }
+
+                
+          }catch(Exception e){ System.out.println(e);}
+        %>
+  
+<aside id="fh5co-hero" clsas="js-fullheight">
 		<div class="flexslider js-fullheight">
 			<ul class="slides">
 		   	<li style="background-image: url(images/slide_1.jpg);">
