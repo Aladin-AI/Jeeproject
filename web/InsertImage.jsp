@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.io.InputStream"%>
@@ -29,6 +30,36 @@
 
             String command = "INSERT INTO ehi (username, password) VALUES ('tom', 'Tom')";
             statement.executeUpdate(command);*/
+                       // HttpSession session1 = request.getSession();
+ 
+             /* String subj=request.getParameter("sub");
+              String descrip=request.getParameter("desc");
+              String count=request.getParameter("coun");
+              String sta=request.getParameter("st");
+              String adre=request.getParameter("adr");
+              String imag=request.getParameter("im");
+
+                 session.setAttribute("Subject", subj);
+                 session.setAttribute("description", descrip);
+                 session.setAttribute("country", count);
+                 session.setAttribute("state", sta);
+                 session.setAttribute("adress", adre);
+                 session.setAttribute("image", imag);
+
+
+         
+    
+
+                        String Subject = (String)session.getAttribute("Subject"); 
+                       String description =(String)session.getAttribute("description"); 
+                       String country = (String)session.getAttribute("country"); 
+                       String state = (String)session.getAttribute("state"); 
+                       String adress = (String)session.getAttribute("adress"); 
+                       String image = (String)session.getAttribute("image");*/
+                    
+      out.println(request.getParameter("desc"));
+            out.println(request.getParameter("im"));      
+          
           try{
           Connection myConnection = null;
                        PreparedStatement pstmt = null;
@@ -38,18 +69,19 @@
   
                 Class.forName("com.mysql.jdbc.Driver");
                  myConnection = DriverManager.getConnection(j2ee);
-                                 File image = new File("C:/Users/hmidi/Desktop/image.png");
-               pstmt = myConnection.prepareStatement("insert into reclamation(subject,description,country,state,image) values(?,?,?,?,?)");
-                pstmt.setString(1, "Sumanth");
-                pstmt.setString(2, "Garakarajula");
-                pstmt.setString(3, "Garakarajula");
-                pstmt.setString(4, "Garakarajula");
+                                 File imageup = new File("C:/Users/hmidi/Desktop/"+request.getParameter("im"));
+               pstmt = myConnection.prepareStatement("insert into reclamation(subject,description,country,state,adress,image) values(?,?,?,?,?,?)");
+                pstmt.setString(1, request.getParameter("sub"));
+                pstmt.setString(2, request.getParameter("desc"));
+                pstmt.setString(3, request.getParameter("coun"));
+                pstmt.setString(4, request.getParameter("st"));
+                pstmt.setString(5, request.getParameter("adr"));
 
-                 fis = new FileInputStream(image);
-                pstmt.setBinaryStream(5, (InputStream)fis, (int)(image.length()));
+                 fis = new FileInputStream(imageup);
+                pstmt.setBinaryStream(6, (InputStream)fis, (int)(imageup.length()));
 
-                int count = pstmt.executeUpdate();
-                if (count > 0) {
+                int c = pstmt.executeUpdate();
+                if (c > 0) {
                     System.out.println("The image has been inserted successfully");
                 } else {
                     System.out.println("The image did not insert successfully");
